@@ -347,18 +347,6 @@ function handleComplete() {
   finishPuzzle();
 }
 
-  // クリア時に星評価を保存
-  function saveStageStars(stage, stars) {
-    const stageData = JSON.parse(localStorage.getItem("stageData") || "{}");
-  
-    // すでに保存済みの星より高い時だけ更新
-    if (!stageData[stage] || stageData[stage] < stars) {
-      stageData[stage] = stars;
-    }
-  
-    localStorage.setItem("stageData", JSON.stringify(stageData));
-  }
-
 
   // =========================
 // ピース操作
@@ -708,52 +696,55 @@ function playPlaceAnimation(piece, x, y, dropLayer) {
 }
 
 function finishPuzzle() {
-  if (typeof gsap === "undefined") return;
-
   const board = document.querySelector(".puzzleBoard");
   const pieces = document.querySelectorAll(".pieceCard");
-
-  gsap.to(".puzzleBoard img", {
-    filter: "brightness(1) saturate(1)",
-    duration: 0.6,
-    ease: "power2.out",
-  });
-
-  gsap.fromTo(
-    pieces,
-    { scale: 1 },
-    {
-      scale: 1.08,
-      duration: 0.3,
-      yoyo: true,
-      repeat: 1,
-      stagger: 0.02,
-      ease: "power2.out",
-    }
-  );
-
   const resultModal = document.querySelector(".resultModal");
 
+  // GSAPがある時だけ演出
+  if (typeof gsap !== "undefined") {
+    gsap.to(".puzzleBoard img", {
+      filter: "brightness(1) saturate(1)",
+      duration: 0.6,
+      ease: "power2.out",
+    });
+
+    gsap.fromTo(
+      pieces,
+      { scale: 1 },
+      {
+        scale: 1.08,
+        duration: 0.3,
+        yoyo: true,
+        repeat: 1,
+        stagger: 0.02,
+        ease: "power2.out",
+      }
+    );
+
+    if (board) {
+      const glow = document.createElement("div");
+      glow.classList.add("finishGlow");
+      board.appendChild(glow);
+
+      gsap.fromTo(
+        glow,
+        { scale: 0.3, opacity: 1 },
+        {
+          scale: 2.2,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          onComplete: () => glow.remove(),
+        }
+      );
+    }
+  }
+
+  // GSAPがなくても必ずモーダルは出す
   if (resultModal) {
     setTimeout(() => {
       resultModal.classList.add("is-active");
       resultModal.setAttribute("aria-hidden", "false");
     }, 500);
   }
-
-  const glow = document.createElement("div");
-  glow.classList.add("finishGlow");
-  board.appendChild(glow);
-
-  gsap.fromTo(
-    glow,
-    { scale: 0.3, opacity: 1 },
-    {
-      scale: 2.2,
-      opacity: 0,
-      duration: 0.8,
-      ease: "power2.out",
-      onComplete: () => glow.remove(),
-    }
-  );
 }
