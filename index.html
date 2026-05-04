@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stage Select</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+  <main class="stagePage">
+
+    <header class="stageHeader">
+
+      <div class="stageTitleBox">
+        <p class="stageSpark">✦</p>
+        <h1 class="stageTitle">STAGE SELECT</h1>
+        <p class="stageLead">ステージを選んでください</p>
+      </div>
+    </header>
+
+    <section class="collectionCard">
+      <div class="collectionText">
+        <p class="collectionLabel">COLLECTION</p>
+        <h2 class="collectionTitle">Dream Puzzle</h2>
+        <p class="collectionLead">
+          幻想的な世界のパズルを<br>
+          完成させよう
+        </p>
+      </div>
+
+      <div class="collectionVisual">
+        <img src="./assets/imgs/christmas.jpg" alt="Dream Puzzle">
+      </div>
+    </section>
+
+    <section class="stageGrid" aria-label="ステージ一覧">
+
+      <button class="stageCard" type="button">
+        <span class="stageNum">01</span>
+        <span class="stageName">Moon Bottle</span>
+        <span class="stageStars">☆☆☆</span>
+      </button>
+
+      <button class="stageCard" type="button">
+        <span class="stageNum">02</span>
+        <span class="stageName">Christmas Tree</span>
+        <span class="stageStars">☆☆☆</span>
+      </button>
+
+      <button class="stageCard" type="button">
+        <span class="stageNum">03</span>
+        <span class="stageName">Starry Portal</span>
+        <span class="stageStars">☆☆☆</span>
+      </button>
+
+      <button class="stageCard is-locked" type="button" disabled>
+        <span class="lockIcon"></span>
+        <span class="stageNum">04</span>
+        <span class="stageName">Flower Gate</span>
+        <span class="stageStars">☆☆☆</span>
+      </button>
+
+      <button class="stageCard is-locked" type="button" disabled>
+        <span class="lockIcon"></span>
+        <span class="stageNum">05</span>
+        <span class="stageName">Candy Drive</span>
+        <span class="stageStars">☆☆☆</span>
+      </button>
+
+      <button class="stageCard is-locked" type="button" disabled>
+        <span class="lockIcon"></span>
+        <span class="stageNum">06</span>
+        <span class="stageName">Snowy Night</span>
+        <span class="stageStars">☆☆☆</span>
+      </button>
+
+    </section>
+
+    <!-- <div class="stageHome">
+      <button class="homeBtn" type="button">
+        <span>⌂</span>
+        HOME
+      </button>
+    </div> -->
+
+  </main>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>
