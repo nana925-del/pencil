@@ -119,12 +119,12 @@ if (!board) return;
 // ステージ画像データ
 // =========================
   const stageImages = {
-    "1": "./assets/imgs/moon.jpg",
-    "2": "./assets/imgs/christmas.jpg",
-    "3": "./assets/imgs/another-world.jpg",
-    "4": "./assets/imgs/flower-gate.gif",
-    "5": "./assets/imgs/sweets-town.jpg",
-    "6": "./assets/imgs/creative-sweets.jpg",
+    "1": "moon.jpg",
+    "2": "christmas.jpg",
+    "3": "another-world.jpg",
+    "4": "flower-gate.gif",
+    "5": "sweets-town.jpg",
+    "6": "creative-sweets.jpg",
   };
 
   // =========================
