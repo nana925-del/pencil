@@ -36,7 +36,7 @@
   .stageTitle {
     margin: 0;
     font-family: serif;
-    font-size: 34px;
+    font-size: 0.8rem;
     line-height: 1.15;
     letter-spacing: 0.08em;
     color: #fff3d8;
@@ -288,3 +288,31 @@
       transform: scale(1) translateY(0);
     }
   }
+
+
+/* coming soon */
+.isComingSoon .stageNumber {
+  font-size: 16px;
+  letter-spacing: 0.1em;
+}
+
+.isComingSoon .stageNumber::before {
+  content: "Coming Soon";
+}
+
+.isComingSoon .stageNumber {
+  color: #aaa;
+}
+
+.isComingSoon .stageStars {
+  opacity: 0.3;
+}
+
+.isComingSoon .stageNumber {
+  font-size: 0;
+}
+
+.isComingSoon {
+  pointer-events: none;
+  opacity: 0.5;
+}
