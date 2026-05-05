@@ -68,7 +68,7 @@ body {
 
 .helpBtn {
   position: absolute;
-  top: -17px;
+  top: -4px;
   right: 0;
 
   width: 44px;
@@ -84,7 +84,7 @@ body {
 .helpBtn::after {
   content: "使い方";
   position: absolute;
-  bottom: -3px;
+  bottom: -18px;
   font-size: 10px;
   opacity: 0.7;
 }
@@ -575,7 +575,7 @@ body {
   position: relative;
   z-index: 1;
   width: min(86%, 320px);
-  margin: 180px auto 0;
+  margin: 0 auto;
   padding: 28px 24px;
   border-radius: 22px;
 
