@@ -1,91 +1,318 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stage Select</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
+/* =========================
+  Stage Select Page
+========================= */
 
-<body>
-  <main class="stagePage">
+.stagePage {
+    min-height: 100vh;
+    padding: 28px 20px 32px;
+    overflow: hidden;
+    color: #fff8ef;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(139, 110, 196, 0.45), transparent 38%),
+      linear-gradient(180deg, #201947 0%, #141033 100%);
+  }
+  
+  
+  /* =========================
+    Header
+  ========================= */
+  
+  .stageHeader {
+    position: relative;
+    display: block;
+    margin-bottom: 24px;
+    padding-top: 8px;
+  }
+  
+  .stageTitleBox {
+    text-align: center;
+  }
+  
+  .stageSpark {
+    margin: 0 0 4px;
+    color: #ffd98a;
+  }
+  
+  .stageTitle {
+    margin: 0;
+    font-family: serif;
+    font-size: 34px;
+    line-height: 1.15;
+    letter-spacing: 0.08em;
+    color: #fff3d8;
+    text-shadow: 0 0 14px rgba(255, 218, 150, 0.45);
+  }
+  
+  .stageLead {
+    margin: 10px 0 0;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  
+  
+  /* =========================
+    Collection Card
+  ========================= */
+  
+  .collectionCard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 18px;
+    margin-bottom: 24px;
+    border-radius: 24px;
+    background: rgba(94, 82, 136, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      0 14px 34px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(12px);
+  }
+  
+  .collectionLabel {
+    margin: 0 0 6px;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: #f8dca7;
+  }
+  
+  .collectionTitle {
+    margin: 0;
+    font-family: serif;
+    font-size: 30px;
+    color: #fff3d8;
+  }
+  
+  .collectionLead {
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  
+  .collectionVisual {
+    overflow: hidden;
+    border-radius: 18px;
+  }
+  
+  .collectionVisual img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  
+  
+  /* =========================
+    Stage Grid
+  ========================= */
+  
+  .stageGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  
+  .stageCard {
+    position: relative;
+    min-height: 136px;
+    padding: 18px 10px;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    background: rgba(94, 82, 136, 0.58);
+    color: #fff8ef;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.4s ease;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      0 10px 24px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(12px);
+  }
+  
+  .stageCard.is-locked {
+    opacity: 0.45;
+  }
+  
+  .stageCard.is-unlocked {
+    animation: fadeUnlock 0.5s ease forwards;
+  }
+  
+  .stageNum {
+    display: block;
+    font-family: serif;
+    font-size: 42px;
+    line-height: 1;
+    color: #fff3d8;
+  }
+  
+  .stageName {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  
+  
+  /* =========================
+    Stars
+  ========================= */
+  
+  .stageStars {
+    display: inline-block;
+    margin-top: 8px;
+    color: #ffd16d;
+    font-size: 20px;
+    letter-spacing: 0.08em;
+  }
+  
+  .stageStars.is-animated {
+    animation: starPop 0.45s ease both;
+  }
+  
+  
+  /* =========================
+    Lock / New Badge
+  ========================= */
+  
+  .lockIcon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+  
+  .stageCard .lockIcon {
+    display: none;
+  }
+  
+  .stageCard.is-locked .lockIcon {
+    display: block;
+  }
+  
+  .newBadge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: #ff78bd;
+    color: #fff8ef;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    box-shadow: 0 0 12px rgba(255, 120, 189, 0.55);
+    animation: newBadgePop 0.5s ease both;
+  }
+  
+  
+  /* =========================
+    Result Modal Buttons
+  ========================= */
+  
+  .resultActions {
+    display: grid;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  
+  .resultModal__btn {
+    width: 100%;
+    height: 48px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(180deg, #f2d8c7, #b99fb3);
+    color: #fff8ef;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(255, 210, 190, 0.25);
+  }
+  
+  .resultModal__btn--secondary {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow: none;
+  }
+  
+  .resultClose {
+    border: none;
+    background: transparent;
+    color: rgba(255, 248, 239, 0.75);
+    font-size: 14px;
+  }
+  
+  
+  /* =========================
+    Animation
+  ========================= */
+  
+  @keyframes starPop {
+    0% {
+      opacity: 0;
+      transform: scale(0.6) translateY(4px);
+      filter: brightness(0.8);
+    }
+  
+    60% {
+      opacity: 1;
+      transform: scale(1.18) translateY(-2px);
+      filter: brightness(1.4);
+    }
+  
+    100% {
+      transform: scale(1) translateY(0);
+      filter: brightness(1);
+    }
+  }
+  
+  @keyframes fadeUnlock {
+    0% {
+      opacity: 0;
+      transform: translateY(8px) scale(0.95);
+      filter: blur(2px);
+    }
+  
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+  
+  @keyframes newBadgePop {
+    0% {
+      opacity: 0;
+      transform: scale(0.7) translateY(4px);
+    }
+  
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
 
-    <header class="stageHeader">
 
-      <div class="stageTitleBox">
-        <p class="stageSpark">✦</p>
-        <h1 class="stageTitle">STAGE SELECT</h1>
-        <p class="stageLead">ステージを選んでください</p>
-      </div>
-    </header>
+/* coming soon */
+.isComingSoon .stageNumber {
+  font-size: 16px;
+  letter-spacing: 0.1em;
+}
 
-    <section class="collectionCard">
-      <div class="collectionText">
-        <p class="collectionLabel">COLLECTION</p>
-        <h2 class="collectionTitle">Dream Puzzle</h2>
-        <p class="collectionLead">
-          幻想的な世界のパズルを<br>
-          完成させよう
-        </p>
-      </div>
+.isComingSoon .stageNumber::before {
+  content: "Coming Soon";
+}
 
-      <div class="collectionVisual">
-        <img src="./christmas.jpg" alt="Dream Puzzle">
-      </div>
-    </section>
+.isComingSoon .stageNumber {
+  color: #aaa;
+}
 
-    <section class="stageGrid" aria-label="ステージ一覧">
+.isComingSoon .stageStars {
+  opacity: 0.3;
+}
 
-      <button class="stageCard" type="button">
-        <span class="stageNum">01</span>
-        <span class="stageName">Moon Bottle</span>
-        <span class="stageStars">☆☆☆</span>
-      </button>
+.isComingSoon .stageNumber {
+  font-size: 0;
+}
 
-      <button class="stageCard" type="button">
-        <span class="stageNum">02</span>
-        <span class="stageName">Christmas Tree</span>
-        <span class="stageStars">☆☆☆</span>
-      </button>
-
-      <button class="stageCard" type="button">
-        <span class="stageNum">03</span>
-        <span class="stageName">Starry Portal</span>
-        <span class="stageStars">☆☆☆</span>
-      </button>
-
-      <button class="stageCard is-locked" type="button" disabled>
-        <span class="lockIcon"></span>
-        <span class="stageNum">04</span>
-        <span class="stageName">Flower Gate</span>
-        <span class="stageStars">☆☆☆</span>
-      </button>
-
-      <button class="stageCard is-locked" type="button" disabled>
-        <span class="lockIcon"></span>
-        <span class="stageNum">05</span>
-        <span class="stageName">Candy Drive</span>
-        <span class="stageStars">☆☆☆</span>
-      </button>
-
-      <button class="stageCard isComingSoon" type="button" disabled>
-        <span class="lockIcon"></span>
-        <span class="stageNumber">06</span>
-        <span class="stageTitle">Snowy Night</span>
-        <span class="stageStars">☆☆☆</span>
-      </button>
-
-    </section>
-
-    <!-- <div class="stageHome">
-      <button class="homeBtn" type="button">
-        <span>⌂</span>
-        HOME
-      </button>
-    </div> -->
-
-  </main>
-
-  <script src="./main.js"></script>
-</body>
-</html>
+.isComingSoon {
+  pointer-events: none;
+  opacity: 0.5;
+}
