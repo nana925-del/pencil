@@ -157,17 +157,18 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 8px;
 }
 
 .pieceHeader > div:first-child {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  /* gap: 2px; */
 }
 
 .pieceTitle {
   margin: 0; 
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   color: #F6C1D9;
@@ -175,7 +176,7 @@ body {
 
 .pieceLead {
   margin: 0; 
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   color: rgba(255,255,255,0.6);
 }
 
@@ -502,7 +503,7 @@ body {
   position: absolute;
   left: 20px;
   right: 20px;
-  bottom: 137px;
+  bottom: 130px;
   z-index: 4;
 }
 
