@@ -499,6 +499,34 @@ body {
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.22);
 }
 
+.actionBtn {
+  position: relative;
+}
+
+.hintCount,
+.resetCount {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(135deg, #F6C1D9, #F9A8C0);
+  color: #3A2F3B;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 .pieceSection {
   position: absolute;
   left: 20px;
