@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dream Puzzle</title>
 
   <link rel="icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="icon" type="image/png" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="android-chrome-512x512.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stage Select</title>
-  <link rel="stylesheet" href="./style.css">
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,87 +17,158 @@
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Quicksand:wght@600;700&display=swap"
     rel="stylesheet"
   />
+
+  <link rel="stylesheet" href="play-stage.css" />
 </head>
 
 <body>
-  <main class="stagePage">
+  <main class="appFrame" aria-label="パズルアプリ画面">
+    <header class="topBar">
 
-    <header class="stageHeader">
+      <!-- メイン操作グループ -->
+      <div class="mainControls">
+        <button class="iconBtn backBtn" type="button" aria-label="ステージ選択に戻る">‹</button>
+    
+        <div class="glassPill">00:00</div>
+    
+        <button class="iconBtn iconBtn--sm playToggleBtn" type="button" aria-label="一時停止">
+          Ⅱ
+        </button>
+      </div>
+    
+      <!-- ヘルプは別 -->
+      <button class="helpBtn" aria-label="使い方">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2"/>
+          <line x1="12" y1="10" x2="12" y2="16" stroke="white" stroke-width="2"/>
+          <circle cx="12" cy="7" r="1.5" fill="white"/>
+        </svg>
+      </button>
 
-      <div class="stageTitleBox">
-        <p class="stageSpark">✦</p>
-        <h1 class="stageTitle">STAGE SELECT</h1>
-        <p class="stageLead">ステージを選んでください</p>
+      <div class="helpModal" hidden>
+        <div class="helpModal__overlay"></div>
+      
+        <div class="helpModal__content">
+          <h2>遊び方</h2>
+      
+          <ul class="helpList">
+            <li>ピースをドラッグして配置</li>
+            <!-- <li>タップで回転</li> -->
+            <li>完成すると★評価</li>
+          </ul>
+      
+          <div class="helpActions">
+            <button class="btnClose">OK</button>
+            <label class="dontShow">
+              <input type="checkbox"> 次回から表示しない
+            </label>
+          </div>
+        </div>
       </div>
     </header>
+    
+    <div class="subControls">
+      <div class="progressBox">
+        <p class="progressText">0 / 5</p>
+    
+        <div class="starRating">
+          <span>★</span>
+          <span>★</span>
+          <span>★</span>
+        </div>
+    
+        <div class="progressBar">
+          <span></span>
+        </div>
+      </div>
+  
+    </div>
 
-    <section class="collectionCard">
-      <div class="collectionText">
-        <p class="collectionLabel">COLLECTION</p>
-        <h2 class="collectionTitle">Dream Puzzle</h2>
-        <p class="collectionLead">
-          幻想的な世界のパズルを<br>
-          完成させよう
+    <section class="puzzleBoard" aria-label="パズルボード">
+      <img id="puzzleImage" src="" alt="">
+      <div class="dropLayer"></div>
+    </section>
+
+    <div class="bottomActions">
+      <button class="actionBtn actionBtn--primary hintBtn" type="button">
+        ヒント
+        <span class="hintCount">3</span>
+      </button>
+      <button class="actionBtn resetBtn" type="button">
+        リセット
+        <span class="resetCount">5</span>
+      </button>
+      <button class="actionBtn previewBtn" type="button">プレビュー</button>
+    </div>
+
+    <section class="pieceSection" aria-label="ピーストレイ">
+      <div class="pieceHeader">
+        <div>
+          <p class="pieceTitle">PIECE TRAY</p>
+          <p class="pieceLead">ドラッグしてピースを配置しよう</p>
+        </div>
+
+        <div class="pieceOptions">
+          <button class="gridBtn" type="button" aria-label="グリッド表示">
+            <span class="gridBtnIcon" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="pieceTray">
+        <button class="trayArrow trayArrow--prev" type="button" aria-label="前のピース">‹</button>
+
+        <div class="pieces">
+          <div class="pieceCard" data-id="0"></div>
+          <div class="pieceCard" data-id="1"></div>
+          <div class="pieceCard" data-id="2"></div>
+          <div class="pieceCard" data-id="3"></div>
+          <div class="pieceCard" data-id="4"></div>
+          <div class="pieceCard" data-id="5"></div>
+          <div class="pieceCard" data-id="6"></div>
+          <div class="pieceCard" data-id="7"></div>
+          <div class="pieceCard" data-id="8"></div>
+        </div>
+
+        <button class="trayArrow trayArrow--next" type="button" aria-label="次のピース">›</button>
+      </div>
+    </section>
+
+
+
+    <!-- プレビュー画面 -->
+    <div class="previewModal" aria-hidden="true">
+      <div class="previewModal__inner">
+        <button class="previewModal__close" type="button">×</button>
+        <p class="previewModal__title">完成イメージ</p>
+        <img src="" alt="完成イメージ">
+      </div>
+    </div>
+
+    <div class="resultModal" aria-hidden="true">
+      <div class="resultModal__inner">
+        <p class="resultModal__label">Puzzle Complete</p>
+        <h2 class="resultModal__title">Complete!</h2>
+    
+        <div class="resultStars">★★★</div>
+    
+        <p class="resultModal__text">
+          すべてのピースが完成しました
         </p>
+
+        <button class="resultModal__btn nextStageBtn" type="button">次のステージで遊ぶ</button>
+        <button class="resultModal__btn resultModal__btn--secondary retryBtn" type="button">もう一度遊ぶ</button>
+
+        <button class="resultModal__subBtn resultClose" type="button">
+          閉じる
+        </button>
       </div>
-
-      <div class="collectionVisual">
-        <img src="./christmas.jpg" alt="Dream Puzzle">
-      </div>
-    </section>
-
-    <section class="stageGrid" aria-label="ステージ一覧">
-
-      <button class="stageCard" type="button">
-        <span class="stageNum">01</span>
-        <span class="stageName">Moon Bottle</span>
-        <span class="stageStars">☆☆☆</span>
-      </button>
-
-      <button class="stageCard" type="button">
-        <span class="stageNum">02</span>
-        <span class="stageName">Christmas Tree</span>
-        <span class="stageStars">☆☆☆</span>
-      </button>
-
-      <button class="stageCard" type="button">
-        <span class="stageNum">03</span>
-        <span class="stageName">Starry Portal</span>
-        <span class="stageStars">☆☆☆</span>
-      </button>
-
-      <button class="stageCard is-locked" type="button" disabled>
-        <span class="lockIcon"></span>
-        <span class="stageNum">04</span>
-        <span class="stageName">Flower Gate</span>
-        <span class="stageStars">☆☆☆</span>
-      </button>
-
-      <button class="stageCard is-locked" type="button" disabled>
-        <span class="lockIcon"></span>
-        <span class="stageNum">05</span>
-        <span class="stageName">Candy Drive</span>
-        <span class="stageStars">☆☆☆</span>
-      </button>
-
-      <button class="stageCard isComingSoon" type="button" disabled>
-        <span class="lockIcon"></span>
-        <span class="stageNumber">06</span>
-        <span class="stageTitle">Snowy Night</span>
-        <span class="stageStars">☆☆☆</span>
-      </button>
-
-    </section>
-
-    <!-- <div class="stageHome">
-      <button class="homeBtn" type="button">
-        <span>⌂</span>
-        HOME
-      </button>
-    </div> -->
-
+    </div>
   </main>
 
-  <script src="./main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
